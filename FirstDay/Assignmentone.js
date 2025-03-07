@@ -67,3 +67,6 @@ console.log(`weatherData: ${weatherData.temperature}`)
 console.log(`weatherData: ${weatherData.condition}`)
 console.log(`weatherData: ${weatherData.huumidty}`)
 
+
+
+// ended assignment now we have 
