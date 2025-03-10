@@ -16,7 +16,7 @@ const MenuItem = require   ("./models/menuitems.js")
 
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
     res.send('Hello from Express Server!');
@@ -47,7 +47,8 @@ app.post("/person", async (req, res) => {
 
 app.get ('/person',async (req, res) => {
     try{
- const data = await Person.findOne()
+ const data = await Person.find()
+res.send(data);
     }
     catch(err){
         console.error(err);
@@ -74,6 +75,16 @@ app.post("/menuitem", async (req, res) => {
     }
 });
 
+
+app.get("/menuitems", async (req, res) => {
+    try {
+        const data = await MenuItem.find();
+        res.json(data);  // Send the fetched data as a response
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
+});
 
 
 app.listen(PORT, () => {
