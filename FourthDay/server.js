@@ -8,8 +8,6 @@ const MenuItemRoutes = require("./routes/menuitemsroutes.js")
 const passport = require('./auth.js');
 
 
-
-
 const app = express();
 // we dont add this line on before updation
 app.use(express.json());
@@ -40,15 +38,10 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 2000;
 
-// how to use authentication use 
-
-
-// use authentication
 
 app.get('/hello', (req, res) => {
     res.send('Hello from Express Server!');
 });
-// end use authentication
 
 
 
