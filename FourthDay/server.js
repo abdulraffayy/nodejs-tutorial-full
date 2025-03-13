@@ -14,7 +14,7 @@ app.use(express.json());
 // end updation 
 
 
-
+const LocalAuthMiddleware = passport.authenticate("local", { session: false })
 // this authentication initiliaz know 
 app.use(passport.initialize());
 
@@ -31,7 +31,7 @@ const logRequest = (req, res, next) => {
 // end middle ware 
 
 
-app.use("/person", PersonRoutes)
+app.use("/person" ,LocalAuthMiddleware,PersonRoutes)
 app.use("/menuitem", MenuItemRoutes)
 
 app.use(bodyParser.json());

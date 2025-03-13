@@ -67,28 +67,31 @@ router.get("/:workType", async (req, res) => {
 });
 
 
-
-router.patch("/:id", async (req, res) => {
+router.get("/:workType", async (req, res) => {
     try {
-        const id = req.params.id;
-        const updatedPersonData = req.body;
+        const { workType } = req.params;
+        const validTypes = ["chef", "manager", "waiter"];
 
-        const response = await Person.findByIdAndUpdate(id, updatedPersonData, {
-            new: true,
-            runValidators: true,
-        });
-
-        if (!response) {
-            return res.status(404).send("Person not found");
+        if (!validTypes.includes(workType)) {
+            return res.status(400).json({ error: "Invalid Work Type" });
         }
 
-        console.log("Data Updated Successfully");
-        res.status(200).json(response);
+        const dataFetching = await Person.find({ workType });
+        if (dataFetching.length === 0) {
+            return res.status(404).json({ message: "No records found" });
+        }
+
+        console.log("Response Fetched");
+        res.status(200).json(dataFetching);
     } catch (err) {
         console.error(err);
-        res.status(500).send("Server Error");
+        res.status(500).json({ error: "Server Error" });
     }
 });
+
+
+
+
 
 
 router.delete("/:id", async (req, res) => {

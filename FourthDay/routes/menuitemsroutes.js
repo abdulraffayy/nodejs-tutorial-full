@@ -1,7 +1,7 @@
 const express = require ("express");
 const router = express.Router() 
 const MenuItem = require("../models/menuitems")
-const passport = require("../auth");
+
 
 router.post("/", async (req, res) => {
     try {
@@ -16,8 +16,8 @@ router.post("/", async (req, res) => {
     }
 });
 
-const LocalAuthMiddleware = passport.authenticate("local", { session: false })
-router.get("/",LocalAuthMiddleware,  async (req, res) => {
+
+router.get("/",async (req, res) => {
     try {
         const data = await MenuItem.find();
         res.json(data);  
